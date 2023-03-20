@@ -21,29 +21,35 @@ class Bot(TeleBot):
         return keyboard
 
     def start_message(self, message):
+        print("log-start-message")
         self.reply_to(message, self.hello)
         self.send_message(message.chat.id, self.description)
         self.send_message(message.chat.id, self.keyboard_description, reply_markup=self.base_keyboard)
 
     def default_generation(self, message):
+        print("log-default-generation")
         self.reply_to(message, self.generate_by_UUID4_reply)
         password = SecurePassword.generate()
         self.send_message(message.chat.id, password)
 
     def generate_by_MD5(self, message):
+        print("log-generation-by_md5")
         self.reply_to(message, self.generate_by_MD5_reply)
         password = SecurePassword.generate_by_MD5()
         self.send_message(message.chat.id, password)
 
     def generate_by_SHA256(self, message):
+        print("log-generation-by-sha256")
         self.reply_to(message, self.generate_by_SHA256_reply)
         password = SecurePassword.generate_by_sha256()
         self.send_message(message.chat.id, password)
 
     def help_message(self, message):
+        print("log-help")
         self.send_message(message.chat.id, self.description)
         self.send_message(message.chat.id, self.keyboard_description, reply_markup=self.base_keyboard)
 
     def not_valid_message(self, message):
+        print("log-not-valid")
         self.reply_to(message, self.dont_understand_reply)
         self.help_message(message)
