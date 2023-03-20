@@ -40,5 +40,4 @@ def message_handle(message):
         bot.not_valid_message(message)
 
 
-if __name__ == "__main__":
-    bot.infinity_polling()
+app = bot.infinity_polling()
